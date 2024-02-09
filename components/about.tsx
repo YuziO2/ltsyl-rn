@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   Linking,
+  Platform,
 } from 'react-native'
 
 const Link = ({ url, children }: { url: string; children: ReactNode }) => {
@@ -26,9 +27,11 @@ const Link = ({ url, children }: { url: string; children: ReactNode }) => {
 export default function About({
   showAbout,
   closeAbout,
+  statusBarHeight,
 }: {
   showAbout: boolean
   closeAbout: () => void
+  statusBarHeight: number
 }) {
   return (
     <Modal visible={showAbout} animationType='fade' onRequestClose={closeAbout}>
@@ -38,6 +41,7 @@ export default function About({
           backgroundColor: 'red',
           width: '100%',
           alignItems: 'center',
+          paddingTop: Platform.OS === 'ios' ? statusBarHeight : 0,
         }}
       >
         <TouchableOpacity
@@ -45,7 +49,7 @@ export default function About({
           style={{
             position: 'absolute',
             left: 5,
-            top: 5,
+            top: 5 + (Platform.OS === 'ios' ? statusBarHeight : 0),
           }}
         >
           <Image
@@ -58,7 +62,7 @@ export default function About({
         </TouchableOpacity>
         <Image
           source={require('../assets/icon.png')}
-          style={{ width: 80, height: 80, marginTop: 20, marginBottom: 10 }}
+          style={{ width: 100, height: 100, marginTop: 20, marginBottom: 10 }}
         />
         <Text
           style={{
@@ -72,7 +76,7 @@ export default function About({
           李田所语录-RN
         </Text>
       </View>
-      <ScrollView style={{ margin: 12 }}>
+      <ScrollView style={{ margin: 12, marginBottom: 0 }}>
         <Text style={{ fontSize: 18 }}>
           <Text>
             作者：

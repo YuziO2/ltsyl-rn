@@ -5,7 +5,6 @@ import {
   Text,
   View,
   Image,
-  SafeAreaView,
   Platform,
   StatusBar as RNStatusBar,
   NativeModules,
@@ -17,6 +16,7 @@ import About from './components/about'
 
 export default function App() {
   const [showAbout, setShowAbout] = useState(false)
+  const [statusBarHeight, setStatusBarHeight] = useState(0)
   useEffect(() => {
     const setScreenOrientation = async () => {
       await ScreenOrientation.lockAsync(
@@ -25,28 +25,27 @@ export default function App() {
     }
 
     setScreenOrientation()
+    if (Platform.OS === 'ios') {
+      NativeModules.StatusBarManager.getHeight((height: { height: number }) => {
+        setStatusBarHeight(height.height)
+      })
+    } else if (Platform.OS === 'android') {
+      setStatusBarHeight(RNStatusBar.currentHeight!)
+    }
   }, [])
 
-  let statusBarHeight = 0
-  if (Platform.OS === 'ios') {
-    NativeModules.StatusBarManager.getHeight((height: number) => {
-      statusBarHeight = height
-    })
-  } else if (Platform.OS === 'android') {
-    statusBarHeight = RNStatusBar.currentHeight!
-  }
-
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: statusBarHeight }}>
+    <View style={{ flex: 1 }}>
       <StatusBar style='auto' backgroundColor='red' />
       <View
         style={{
-          height: 50,
+          height: 70,
           alignItems: 'center',
           flexDirection: 'row',
           justifyContent: 'space-between',
           paddingHorizontal: 20,
           backgroundColor: 'red',
+          paddingTop: statusBarHeight,
         }}
       >
         <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'yellow' }}>
@@ -69,7 +68,8 @@ export default function App() {
         closeAbout={() => {
           setShowAbout(false)
         }}
+        statusBarHeight={statusBarHeight}
       />
-    </SafeAreaView>
+    </View>
   )
 }
