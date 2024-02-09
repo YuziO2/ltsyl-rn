@@ -58,7 +58,7 @@ export default function About({
         </TouchableOpacity>
         <Image
           source={require('../assets/icon.png')}
-          style={{ width: 200, height: 200, marginTop: 20, marginBottom: 10 }}
+          style={{ width: 80, height: 80, marginTop: 20, marginBottom: 10 }}
         />
         <Text
           style={{
@@ -72,7 +72,7 @@ export default function About({
           李田所语录-RN
         </Text>
       </View>
-      <ScrollView style={{ padding: 12 }}>
+      <ScrollView style={{ margin: 12 }}>
         <Text style={{ fontSize: 18 }}>
           <Text>
             作者：

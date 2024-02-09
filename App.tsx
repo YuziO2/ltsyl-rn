@@ -1,5 +1,6 @@
+import * as ScreenOrientation from 'expo-screen-orientation'
 import { StatusBar } from 'expo-status-bar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Text,
   View,
@@ -16,6 +17,15 @@ import About from './components/about'
 
 export default function App() {
   const [showAbout, setShowAbout] = useState(false)
+  useEffect(() => {
+    const setScreenOrientation = async () => {
+      await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.DEFAULT,
+      )
+    }
+
+    setScreenOrientation()
+  }, [])
 
   let statusBarHeight = 0
   if (Platform.OS === 'ios') {
