@@ -32,12 +32,6 @@ export default function About({
 }) {
   return (
     <Modal visible={showAbout} animationType='fade' onRequestClose={closeAbout}>
-      {/* <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>About Page</Text>
-        <TouchableOpacity onPress={closeAbout} style={{ marginTop: 16 }}>
-          <Text style={{ fontSize: 16, color: 'blue' }}>Close</Text>
-        </TouchableOpacity>
-      </View> */}
       <StatusBar style='auto' backgroundColor='red' />
       <View
         style={{

@@ -1,6 +1,5 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer } from '@react-navigation/native'
-import { Text } from 'react-native'
 
 import SoundTable from './audioTable'
 import { soundData } from '../assets/wavs/soundData'
